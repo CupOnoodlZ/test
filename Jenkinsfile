@@ -4,6 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'returnStdout: true, script: 'env'
+                sh 'echo "your test deployment worked!" > /var/jenkins/readme.out'
                 echo 'Building..'
             }
         }
