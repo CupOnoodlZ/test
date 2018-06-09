@@ -1,13 +1,22 @@
+#!groovy
+
 pipeline {
     agent any
 
     stages {
         stage('Build') {
             steps {
-                sh 'returnStdout: true, script: 'env'
+                echo sh(returnStdout: true, script: 'env')
+
+                echo 'Testing pipeline: Creating temp.out...'
+                sh (script: 'touch /var/jenkins/readme.out')
+                sh (script: 'echo "your test deployment worked!!!" >> /var/jenkins/readme.out')
+                //sh ('/bin/touch /var/jenkins/readme.out')
+                //sh ('echo "your test deployment worked!!!" > /var/jenkins/readme.out')
+                echo 'Testing pipeline: Test successful!'
+                
                 echo 'Pulling from the GitHub master branch...'
                 
-                sh 'echo "your test deployment worked!" > /var/jenkins/readme.out'
                 echo 'Building..'
             }
         }
@@ -20,6 +29,11 @@ pipeline {
             steps {
                 echo 'Deploying....'
             }
+        }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 }
