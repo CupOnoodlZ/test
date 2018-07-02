@@ -9,7 +9,8 @@ pipeline {
                 echo sh(returnStdout: true, script: 'env')
 
                 echo 'Testing pipeline: Creating temp.out...'
-                sh (script: 'touch /var/jenkins/readme.out')
+                //sh (script: 'touch /var/jenkins/readme.out')
+                sh (script: 'touch /home/ec2-user/readme.out')
                 sh (script: 'echo "your test deployment worked!!!" >> /var/jenkins/readme.out')
                 //sh ('/bin/touch /var/jenkins/readme.out')
                 //sh ('echo "your test deployment worked!!!" > /var/jenkins/readme.out')
